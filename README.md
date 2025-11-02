@@ -38,7 +38,6 @@
 
 ## 📦 Installation
 
->>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 ### 1. Install via Composer
 
 ```bash
