@@ -35,8 +35,10 @@
 
 ---
 
-## �📦 Installation
 
+## 📦 Installation
+
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 ### 1. Install via Composer
 
 ```bash
@@ -214,7 +216,8 @@ Livewire components can dispatch toast events from the frontend:
 ```php
 // In your Livewire component
 <button wire:click="$dispatch('toast', {
-    type: 'success',message: 'Action completed!'
+    type: 'success',
+    message: 'Action completed!'
 })">
     Click Me
 </button>
@@ -364,11 +367,11 @@ window.pushToast('error', 'Something went wrong', {
 });
 
 // Confirmation dialog
-window.pushToastConfirm('Are you sure?', '/delete/123', {
-  title: 'Confirm',
-  emoji: '⚠️',
-  onConfirm: 'Yes',
-  onCancel: 'No'
+window.pushToastConfirm("Are you sure?", "/delete/123", {
+    title: "Confirm",
+    emoji: "⚠️",
+    onConfirm: "Yes",
+    onCancel: "No",
 });
 ```
 
@@ -415,7 +418,7 @@ export function confirmDelete(url) {
 
 ## Available Emojis:
 
-````php
+```php
 // Success
 ->emoji('✅') ->emoji('🎉') ->emoji('👍') ->emoji('✔️')
 
@@ -433,7 +436,7 @@ export function confirmDelete(url) {
 
 // Actions
 ->emoji('👁️') ->emoji('✏️') ->emoji('📝') ->emoji('💾')```
-
+```
 ---
 
 ## Real-World Examples:
@@ -452,7 +455,7 @@ public function store(Request $request)
 
     return redirect()->route('users.index');
 }
-````
+```
 
 #### Example 2: Before deleting (your current use case)
 
