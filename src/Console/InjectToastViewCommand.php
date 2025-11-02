@@ -1,6 +1,6 @@
 <?php
 
-namespace Halaby\Toasts\Console;
+namespace IslamAlsayed\Toasts\Console;
 
 use Illuminate\Console\Command;
 
@@ -44,7 +44,7 @@ class InjectToastViewCommand extends Command
 
         // Inject Blade snippet into master.blade.php (if not already present)
         if (strpos($masterContents, "@include('vendor.toasts.toasts')") === false) {
-            // Use regex to find <body> tag with or without attributes
+            // Use regex to find <head> tag with or without attributes
             if (preg_match('/<body[^>]*>/i', $masterContents, $matches)) {
                 $bodyTag = $matches[0];
                 $masterContents = preg_replace(
@@ -110,7 +110,7 @@ class InjectToastViewCommand extends Command
         } else {
             if (strpos($masterContents, '<script type="module" src="{{ asset(\'vendor/toasts/js/toasts.js\') }}"></script>') === false) {
                 $masterContents = file_get_contents($masterPath); // reload content
-                $masterContents = str_replace('</body>', $jsSnippet . "\n</body>", $masterContents);
+                $masterContents = str_replace('</head>', $jsSnippet . "\n</head>", $masterContents);
                 try {
                     file_put_contents($masterPath, $masterContents);
                     $this->info("JS snippet injected into master.blade.php");

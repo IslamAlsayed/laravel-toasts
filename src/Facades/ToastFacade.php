@@ -1,6 +1,6 @@
 <?php
 
-namespace Halaby\Toasts\Facades;
+namespace IslamAlsayed\Toasts\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Halaby\Toasts;
+namespace IslamAlsayed\Toasts;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -83,7 +83,7 @@ class ToastServiceProvider extends ServiceProvider
         });
 
         $this->commands([
-            \Halaby\Toasts\Console\InjectToastViewCommand::class,
+            \IslamAlsayed\Toasts\Console\InjectToastViewCommand::class,
         ]);
 
         require_once __DIR__ . '/Helpers.php';
