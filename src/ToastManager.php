@@ -1,6 +1,6 @@
 <?php
 
-namespace Halaby\Toasts;
+namespace IslamAlsayed\Toasts;
 
 class ToastManager
 {
