@@ -76,7 +76,7 @@ TOASTS_CONFIRM_PIN=true              # Keep confirms pinned by default
 
 # Display settings
 TOASTS_DEFAULT_DIR=ltr               # Text direction: ltr or rtl
-TOASTS_DEFAULT_POSITION=top       # Toast position: top, right
+TOASTS_DEFAULT_POSITION=top          # Toast position: top, right
 TOASTS_DEFAULT_THEME=info            # Default theme: success, error, warning, info
 
 # Default messages
