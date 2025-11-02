@@ -5,7 +5,13 @@
 ![Arabic Toasts](./src/Resources/assets/images/toasts_ar.png)
 
 =======
+<<<<<<< HEAD
+![English Toasts](./src/Resources/assets/images/toasts.png)
+![Arabic Toasts](./src/Resources/assets/images/toasts_ar.png)
+
+=======
 >>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
+>>>>>>> b8126bf14da3bb72019997fa01c6067568503fa2
 ## Installation
 
 ```bash
@@ -63,20 +69,25 @@ addConfirm('Delete this?')
 ```php
 public function delete($id)
 {
-    $this->safeDestroy($id, 'model');
-}
-
-// Or with custom toast
-public function deleteCustom($id)
-{
-    $success = $this->safeDestroy($id, 'model', showToast: false);
-
-    if ($success) {
-        addToast('success', 'Deleted!')
-            ->emoji('🎯')
-            ->duration('3s');
+    $user = User::find($id);
+    if ($user) {
+        $user->delete();
+        $this->dispatch('show-toast', [
+            'type' => 'success',
+            'message' => 'Users deleted successfully.',
+            'title' => 'Success',
+            'emoji' => '✅'
+        ]);
+    } else {
+        $this->dispatch('show-toast', [
+            'type' => 'error',
+            'message' => 'Users not found.',
+            'title' => 'Error',
+            'emoji' => '❌'
+        ]);
     }
 }
+
 ```
 
 ## JavaScript Usage

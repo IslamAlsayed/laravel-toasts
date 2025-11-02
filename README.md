@@ -76,7 +76,7 @@ TOASTS_CONFIRM_PIN=true              # Keep confirms pinned by default
 
 # Display settings
 TOASTS_DEFAULT_DIR=ltr               # Text direction: ltr or rtl
-TOASTS_DEFAULT_POSITION=bottom       # Toast position: top, bottom, left, right
+TOASTS_DEFAULT_POSITION=top       # Toast position: top, right
 TOASTS_DEFAULT_THEME=info            # Default theme: success, error, warning, info
 
 # Default messages
@@ -403,7 +403,7 @@ export function confirmDelete(url) {
 
 ## Available Emojis:
 
-````php
+```php
 // Success
 ->emoji('✅') ->emoji('🎉') ->emoji('👍') ->emoji('✔️')
 
@@ -421,7 +421,7 @@ export function confirmDelete(url) {
 
 // Actions
 ->emoji('👁️') ->emoji('✏️') ->emoji('📝') ->emoji('💾')```
-
+```
 ---
 
 ## Real-World Examples:
@@ -440,7 +440,7 @@ public function store(Request $request)
 
     return redirect()->route('users.index');
 }
-````
+```
 
 #### Example 2: Before deleting (your current use case)
 

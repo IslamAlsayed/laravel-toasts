@@ -33,7 +33,11 @@
     font-family: "Roboto Condensed", Arial !important;
 }
 
+<<<<<<< HEAD
 .toast:has(.confirm-forever) {
+=======
+.toast :has(.confirm-forever) {
+>>>>>>> 9f07e52a8a9e35e8613c12c09e41af0cc36b5862
     user-select: none !important;
 }
 
@@ -88,6 +92,12 @@
         }
 
         & .toast-icon {
+<<<<<<< HEAD
+=======
+            /* padding-block-start: 10px; */
+            /* padding-inline-start: 15px; */
+
+>>>>>>> 9f07e52a8a9e35e8613c12c09e41af0cc36b5862
             &.emoji {
                 padding-block-start: 5px;
                 padding-inline-start: 10px;
