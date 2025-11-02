@@ -1,8 +1,11 @@
 # 🎯 Laravel Toasts - Quick Reference Card
 
+<<<<<<< HEAD
 ![English Toasts](./src/Resources/assets/images/toasts.png)
 ![Arabic Toasts](./src/Resources/assets/images/toasts_ar.png)
 
+=======
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 ## Installation
 
 ```bash

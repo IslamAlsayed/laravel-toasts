@@ -23,6 +23,7 @@
 
 ---
 
+<<<<<<< HEAD
 ## � Screenshots
 
 ### English Toasts
@@ -37,6 +38,10 @@
 
 ## �📦 Installation
 
+=======
+## 📦 Installation
+
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 ### 1. Install via Composer
 
 ```bash
@@ -88,7 +93,11 @@ TOASTS_CONFIRM_PIN=true              # Keep confirms pinned by default
 
 # Display settings
 TOASTS_DEFAULT_DIR=ltr               # Text direction: ltr or rtl
+<<<<<<< HEAD
 TOASTS_DEFAULT_POSITION=top       # Toast position: top, right
+=======
+TOASTS_DEFAULT_POSITION=bottom       # Toast position: top, bottom, left, right
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 TOASTS_DEFAULT_THEME=info            # Default theme: success, error, warning, info
 
 # Default messages
@@ -161,7 +170,11 @@ addToast('success', 'User profile updated!')
     ->icon('user-check')        // Font Awesome icon
     ->pin()                     // Make sticky (won't auto-hide)
     ->duration('5s')            // Custom duration (2s, 500ms, 1m)
+<<<<<<< HEAD
     ->position('top')           // Position: top, right
+=======
+    ->position('top')           // Position: top, bottom, left, right
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
     ->dir('rtl')                // Direction: rtl or ltr
     ->theme('success');         // Theme: success, error, warning, info
 ```
@@ -214,7 +227,12 @@ Livewire components can dispatch toast events from the frontend:
 ```php
 // In your Livewire component
 <button wire:click="$dispatch('toast', {
+<<<<<<< HEAD
     type: 'success',message: 'Action completed!'
+=======
+    type: 'success',
+    message: 'Action completed!'
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 })">
     Click Me
 </button>
@@ -240,6 +258,7 @@ The package provides a trait for safe CRUD operations with automatic toast notif
 namespace App\Livewire;
 
 use Livewire\Component;
+<<<<<<< HEAD
 
 class Users extends Component
 {
@@ -263,6 +282,30 @@ class Users extends Component
                 'title' => 'Error',
                 'emoji' => '❌'
             ]);
+=======
+use App\Traits\HandlesCrudSafely;
+
+class TourGuides extends Component
+{
+    use HandlesCrudSafely;
+
+    public function delete($id)
+    {
+        // Default toast notification
+        $this->safeDestroy($id, 'tourGuide');
+    }
+
+    public function deleteWithCustomToast($id)
+    {
+        // Disable default toast and add custom one
+        $success = $this->safeDestroy($id, 'tourGuide', showToast: false);
+
+        if ($success) {
+            addToast('success', 'Tour guide deleted successfully!')
+                ->emoji('🎯')
+                ->title('Deleted')
+                ->duration('3s');
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
         }
     }
 }
@@ -353,6 +396,7 @@ Test toasts directly in the browser console:
 
 ```javascript
 // Simple toast
+<<<<<<< HEAD
 window.pushToast('success', 'It works!');
 
 // Advanced toast
@@ -369,6 +413,24 @@ window.pushToastConfirm('Are you sure?', '/delete/123', {
   emoji: '⚠️',
   onConfirm: 'Yes',
   onCancel: 'No'
+=======
+window.pushToast("success", "It works!");
+
+// Advanced toast
+window.pushToast("error", "Something went wrong", {
+    title: "Error",
+    emoji: "💥",
+    pin: true,
+    duration: "5s",
+});
+
+// Confirmation dialog
+window.pushToastConfirm("Are you sure?", "/delete/123", {
+    title: "Confirm",
+    emoji: "⚠️",
+    onConfirm: "Yes",
+    onCancel: "No",
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 });
 ```
 
@@ -394,6 +456,7 @@ document.getElementById('myButton').addEventListener('click', function() {
 ```javascript
 // In your app.js or custom script
 export function showSuccessToast(message) {
+<<<<<<< HEAD
   window.pushToast('success', message, {
     title: 'Success',
     emoji: '✅',
@@ -408,6 +471,22 @@ export function confirmDelete(url) {
     onConfirm: 'Delete',
     onCancel: 'Cancel'
   });
+=======
+    window.pushToast("success", message, {
+        title: "Success",
+        emoji: "✅",
+        duration: "3s",
+    });
+}
+
+export function confirmDelete(url) {
+    window.pushToastConfirm("Are you sure you want to delete this?", url, {
+        title: "Confirm Deletion",
+        emoji: "🗑️",
+        onConfirm: "Delete",
+        onCancel: "Cancel",
+    });
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 }
 ```
 
@@ -684,7 +763,11 @@ public $title;       // Optional toast title
 public $emoji;       // Emoji next to title
 public $icon;        // Font Awesome icon name
 public $duration;    // Display duration (e.g., 2s, 500ms, 1m)
+<<<<<<< HEAD
 public $position;    // Position: top, right
+=======
+public $position;    // Position: top, bottom, left, right
+>>>>>>> 87589fe3a5d35a46d225f3e5868ac1af7870102a
 public $pin;         // If true, toast remains until manually closed
 public $theme;       // Theme color: success, error, etc.
 public $dir;         // Text direction: ltr or rtl
