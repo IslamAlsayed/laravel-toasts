@@ -82,7 +82,7 @@ class InjectToastViewCommand extends Command
         } else {
             if (strpos($masterContents, '<link rel="stylesheet" href="{{ asset(\'vendor/toasts/css/all.min.css\') }}">') === false) {
                 $masterContents = file_get_contents($masterPath); // reload content
-                $masterContents = str_replace('</head>', $cssSnippet . "\n</head>", $masterContents);
+                $masterContents = str_replace('</head>', $cssSnippet . "</head>", $masterContents);
                 try {
                     file_put_contents($masterPath, $masterContents);
                     $this->info("CSS snippet injected into master.blade.php");
