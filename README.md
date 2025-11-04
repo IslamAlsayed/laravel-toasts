@@ -53,8 +53,11 @@ Run the inject command to add the toast component to your master layout:
 php artisan toasts:inject
 ```
 
-This will automatically inject `@include('toasts')` into your layout file before the closing `</body>` tag.
+This will automatically inject the following into your layout files:
 
+- Blade snippet: `@include('vendor.toasts.toasts')` in your `<body>` tag
+- CSS assets: FontAwesome and Toasts styles in `<head>` or head.blade.php
+- JavaScript: Toasts scripts in `<head>` or foot.blade.php
 ---
 
 ## ⚙️ Configuration
@@ -96,7 +99,42 @@ After publishing, customize `config/toasts.php` for more advanced settings.
 
 ---
 
-## 🚀 Basic Usage
+## �️ Artisan Commands
+
+### `toasts:inject`
+
+Automatically injects toast component references into your layout files.
+
+```bash
+php artisan toasts:inject
+```
+
+**What it does:**
+
+- Adds `@include('vendor.toasts.toasts')` after `<body>` tag in `master.blade.php`
+- Adds CSS links (FontAwesome + Toasts) in `<head>` section
+- Adds JavaScript module in footer or `<head>` section
+- Creates proper comments for easy identification
+
+**Output:**
+
+```
+Blade snippet injected into master.blade.php
+CSS snippet injected into head.blade.php
+JS snippet injected into foot.blade.php
+```
+
+**Command Features:**
+
+- ✅ Smart pattern matching (handles various formatting styles)
+- ✅ Safe operation (only removes toasts-related code)
+- ✅ Informative feedback (clear success/skip messages)
+- ✅ Clean output (removes extra blank lines)
+- ✅ Non-destructive (can be reversed with `toasts:inject`)
+
+---
+
+## �🚀 Basic Usage
 
 ### Simple Toasts
 
@@ -403,7 +441,7 @@ export function confirmDelete(url) {
 
 ## Available Emojis:
 
-```php
+````php
 // Success
 ->emoji('✅') ->emoji('🎉') ->emoji('👍') ->emoji('✔️')
 
@@ -421,7 +459,8 @@ export function confirmDelete(url) {
 
 // Actions
 ->emoji('👁️') ->emoji('✏️') ->emoji('📝') ->emoji('💾')```
-```
+````
+
 ---
 
 ## Real-World Examples:
@@ -706,6 +745,19 @@ Toast::error($message);
 Toast::warning($message);
 Toast::info($message);
 Toast::confirm($message);
+```
+
+### Artisan Commands
+
+| Command           | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `toasts:inject`   | Inject toast references into layout files     |
+
+**Usage Examples:**
+
+```bash
+# Initial setup - inject toasts into layouts
+php artisan toasts:inject
 ```
 
 ---
