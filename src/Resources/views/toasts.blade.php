@@ -17,9 +17,7 @@
 
                         @if (isToastArray($type, 'emoji'))
                             <div class="toast-icon emoji fas" style="font-size: 20px">{!! isToastArray($type, 'emoji') !!}</div>
-                        @endif
-
-                        @if (!isToastArray($type, 'emoji'))
+                        @else
                             <i class="toast-icon fas fa-{{ isToastArray($type, 'icon') ?: getIcon($type) }}"></i>
                         @endif
 
@@ -129,26 +127,28 @@
 
 @if ($errors->any())
     <div class="toasts">
-        <div class="toast toast-error{{ config('toasts.move') != 'enable' ? ' no_move' : '' }}">
-            <i class="toast-icon fas fa-circle-xmark"></i>
+        <div class="toast-inner" @if (app()->getLocale() == 'ar') dir="rtl" @endif>
+            <div
+                class="toast toast-error {{ config('toasts.default_position') }} {{ config('toasts.move') != 'enable' ? 'no_move' : '' }}">
+                <i class="toast-icon fas fa-circle-xmark"></i>
 
-            <div class="toast-text">
-                <div class="text">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                <div class="toast-text">
+                    <div class="text">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-            </div>
 
-            <div class="toast-closed toast-action">
-                <i class="fas fa-xmark"></i>
+                <div class="toast-closed toast-action">
+                    <i class="fas fa-xmark"></i>
+                </div>
             </div>
         </div>
     </div>
 @endif
-
 
 <script>
     configToast = @json(config('toasts'));
