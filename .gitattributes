@@ -1,7 +1,6 @@
 # Exclude development and documentation files from package exports
 /.github export-ignore
 /tests export-ignore
-/src/Resources/assets/images export-ignore
 /.gitignore export-ignore
 /.gitattributes export-ignore
 /phpunit.xml export-ignore
