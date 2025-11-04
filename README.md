@@ -23,6 +23,18 @@
 
 ---
 
+## 🌍 RTL & Arabic Support
+
+All features work perfectly with Arabic text and RTL direction.
+
+### RTL
+![RTL Example](./src/Resources/assets/images/toasts_ar.png)
+
+### LTR
+![LTR Example](./src/Resources/assets/images/toasts.png)
+
+---
+
 ## 📦 Installation
 
 ### 1. Install via Composer
@@ -759,18 +771,6 @@ Toast::confirm($message);
 # Initial setup - inject toasts into layouts
 php artisan toasts:inject
 ```
-
----
-
-## 🌍 RTL & Arabic Support
-
-All features work perfectly with Arabic text and RTL direction.
-
-![RTL Example - Confirm](./src/Resources/assets/images/confirms_ar.png)
-![RTL Example - Success](./src/Resources/assets/images/success_ar.png)
-![RTL Example - Error](./src/Resources/assets/images/error_ar.png)
-![RTL Example - Warning](./src/Resources/assets/images/warning_ar.png)
-![RTL Example - Info](./src/Resources/assets/images/info_ar.png)
 
 ---
 
