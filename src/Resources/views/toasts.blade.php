@@ -81,14 +81,16 @@
                             </div>
 
                             @if ($toast->type != 'confirm')
-                                <div class="toast-actions">
-                                    @foreach ($toast->actions as $action)
-                                        <a href="{{ $action['url'] }}"
-                                            class="toast-action {{ isEmoji($action['label']) ? 'emoji' : 'text' }}">
-                                            {{ $action['label'] }}
-                                        </a>
-                                    @endforeach
-                                </div>
+                                @if ($toast->actions)
+                                    <div class="toast-actions">
+                                        @foreach ($toast->actions as $action)
+                                            <a href="{{ $action['url'] }}"
+                                                class="toast-action {{ isEmoji($action['label']) ? 'emoji' : 'text' }}">
+                                                {{ $action['label'] }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endif
                             @elseif ($toast->type == 'confirm')
                                 @if ($toast->actions)
                                     <div class="toast-actions">
@@ -102,7 +104,7 @@
                                 @endif
 
                                 <div class="toast-actions">
-                                    <a href="{{ $toast->link }}"
+                                    <a href="{{ $toast->link ?? '#' }}"
                                         @if ($toast->target) target="{{ $toast->target }}" @endif
                                         class="toast-action onconfirm {{ isEmoji($toast->onconfirm) ? 'emoji' : 'text' }}">
                                         {{ $toast->onconfirm }}
