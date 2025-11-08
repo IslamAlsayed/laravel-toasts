@@ -6,6 +6,7 @@ class ToastFactory
 {
     public $type;
     public $message;
+    public $messageMode;
     public $title = null;
     public $emoji = null;
     public $icon = null;
@@ -20,11 +21,12 @@ class ToastFactory
     public $oncancel = null;
     public $actions = [];
 
-    public function __construct($type, $message = null)
+    public function __construct($type, $message = null, $messageMode)
     {
         $this->type = $type;
         $this->message = $message ?: config('toasts.default_message', 'default message');
-        $this->title = $type ?: config('toasts.default_title', 'default title');
+        $this->title = $messageMode == true ? '' : ($type ?: config('toasts.default_title', 'default title'));
+        // $this->defaultMessageType = $defaultMessageType;
         $this->position = config('toasts.default_position', 'top');
         $this->onconfirm = config('toasts.default_onconfirm_text', 'Yes');
         $this->oncancel = config('toasts.default_oncancel_text', 'No');
@@ -56,7 +58,8 @@ class ToastFactory
     {
         return $this->icon ?: match ($this->type) {
             'success' => 'circle-check',
-            'error' => 'circle-xmark',
+            'error' => 'xmark',
+            'danger' => 'circle-xmark',
             'warning' => 'triangle-exclamation',
             'info' => 'circle-exclamation',
             default => 'bell',
@@ -102,6 +105,7 @@ class ToastFactory
         return $this->theme ?: match ($this->type) {
             'success' => 'success',
             'error' => 'error',
+            'danger' => 'danger',
             'warning' => 'warning',
             'info' => 'info',
             default => function_exists('config') ? config('toasts.default_theme') : null,

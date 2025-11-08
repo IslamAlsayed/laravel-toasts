@@ -14,6 +14,11 @@ class Toast
         return (new ToastManager)->add('error', $message);
     }
 
+    public static function danger($message = null)
+    {
+        return (new ToastManager)->add('danger', $message);
+    }
+
     public static function warning($message = null)
     {
         return (new ToastManager)->add('warning', $message);

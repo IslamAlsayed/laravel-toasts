@@ -126,6 +126,10 @@
             & b {
                 margin-bottom: 5px;
             }
+
+            & p {
+                padding-bottom: 2px;
+            }
         }
 
         & .toast-actions {

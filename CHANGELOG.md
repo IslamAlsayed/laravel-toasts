@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial release
-- Toast notification system with multiple types (success, error, warning, info)
+- Toast notification system with multiple types (success, error, danger, warning, info)
 - Confirmation dialog system
 - Emoji support for toast notifications 🎉
 - Configurable position (top, bottom, left, right)
@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Artisan command to inject toast view into layouts (`php artisan toasts:inject`)
 - **Livewire 3.x integration** with event dispatching
 - **JavaScript API** for client-side toast management (`window.pushToast`, `window.pushToastConfirm`)
-- Comprehensive helper functions (addToast, addToastSuccess, addToastError, etc.)
+- Comprehensive helper functions (showToast, showToastSuccess, showToastErrorMessage, etc.)
 - FontAwesome icon support
 - **Full RTL support** with Arabic language compatibility
 - Action buttons with custom callbacks

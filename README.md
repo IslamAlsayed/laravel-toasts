@@ -8,10 +8,11 @@
 
 ## ✨ Features
 
-- 🎨 **Multiple toast types**: Success ✅, Error ❌, Warning ⚠️, Info ℹ️
+- 🎨 **Multiple toast types**: Success ✅, Error ❌, Danger ⛔, Warning ⚠️, Info ℹ️
+- 🏷️ **Two display modes**: Standard (with titles) and Message-only (without titles)
 - 🎭 **Custom icons & emojis** with Font Awesome support
 - 📌 **Pin support** for persistent notifications
-- ⏱️ **Configurable duration** and display positions
+- ⏱️ **Configurable duration** and display positionsش
 - 🌍 **RTL/LTR support** with full Arabic compatibility
 - 🎯 **Livewire 3.x integration** with event dispatching
 - ⚡ **JavaScript API** for client-side notifications
@@ -28,9 +29,11 @@
 All features work perfectly with Arabic text and RTL direction.
 
 ### RTL
+
 ![RTL Example](./src/Resources/assets/images/toasts_ar.png)
 
 ### LTR
+
 ![LTR Example](./src/Resources/assets/images/toasts.png)
 
 ---
@@ -70,6 +73,7 @@ This will automatically inject the following into your layout files:
 - Blade snippet: `@include('vendor.toasts.toasts')` in your `<body>` tag
 - CSS assets: FontAwesome and Toasts styles in `<head>` or head.blade.php
 - JavaScript: Toasts scripts in `<head>` or foot.blade.php
+
 ---
 
 ## ⚙️ Configuration
@@ -152,13 +156,46 @@ JS snippet injected into foot.blade.php
 
 ```php
 // Using helper functions
-addToastSuccess('User created successfully!');
-addToastError('Failed to delete item');
-addToastWarning('Please check your input');
-addToastInfo('New update available');
+showToastSuccess('User created successfully!');
+showToastError('Failed to delete item');
+showToastWarning('Please check your input');
+showToastInfo('New update available');
 
 // Generic helper
-addToast('success', 'Operation completed!');
+showToast('success', 'Operation completed!');
+```
+
+### Message-Only Toasts (Without Titles)
+
+For cleaner, minimal toasts without type titles, use the message variants:
+
+```php
+// Success message without "Success" title
+showToastSuccessMessage('User created successfully!');
+
+// Error message without "Error" title
+showToastErrorMessage('Failed to delete item');
+
+// Danger message without "Danger" title
+showToastDangerMessage('Critical error occurred!');
+
+// Warning message without "Warning" title
+showToastWarningMessage('Please check your input');
+
+// Info message without "Info" title
+showToastInfoMessage('New update available');
+```
+
+**Difference between standard and message variants:**
+
+```php
+// Standard toast (with title)
+showToastSuccess('User created!');
+// Displays: [✅ Success] User created!
+
+// Message-only toast (no title)
+showToastSuccessMessage('User created!');
+// Displays: [✅] User created!
 ```
 
 ### With Session Flash
@@ -193,7 +230,7 @@ Toast::info('System maintenance at 10PM')->pin();
 ### Chaining Methods
 
 ```php
-addToast('success', 'User profile updated!')
+showToast('success', 'User profile updated!')
     ->title('Success')           // Custom title
     ->emoji('🎉')               // Add emoji (replaces icon)
     ->icon('user-check')        // Font Awesome icon
@@ -207,7 +244,7 @@ addToast('success', 'User profile updated!')
 ### With Action Buttons
 
 ```php
-addToast('info', 'New message received')
+showToast('info', 'New message received')
     ->title('Notification')
     ->emoji('📬')
     ->withAction('View', route('messages.show', 1))
@@ -333,7 +370,7 @@ class UserManager extends Component
             ]);
 
             // Success toast
-            addToast('success', 'User created successfully!')
+            showToast('success', 'User created successfully!')
                 ->emoji('👤')
                 ->title('Success')
                 ->withAction('View Users', route('users.index'));
@@ -342,7 +379,7 @@ class UserManager extends Component
 
         } catch (\Exception $e) {
             // Error toast
-            addToast('error', 'Failed to create user: ' . $e->getMessage())
+            showToast('error', 'Failed to create user: ' . $e->getMessage())
                 ->emoji('❌')
                 ->title('Error')
                 ->pin();
@@ -371,7 +408,7 @@ class UserManager extends Component
     </form>
 
     {{-- Dispatch toast from frontend --}}
-    <button wire:click="$dispatch('toast', {
+    <button wire:click="$dispatch('show-toast', {
         type: 'info',
         message: 'Form ready for input',
         emoji: 'ℹ️'
@@ -391,22 +428,27 @@ Test toasts directly in the browser console:
 
 ```javascript
 // Simple toast
-window.pushToast('success', 'It works!');
+window.showToast({ type: "success", message: "It works!" });
 
 // Advanced toast
-window.pushToast('error', 'Something went wrong', {
-  title: 'Error',
-  emoji: '💥',
-  pin: true,
-  duration: '5s'
+window.showToast({
+    type: "error",
+    message: "Something went wrong",
+    title: "Error",
+    emoji: "💥",
+    pin: true,
+    duration: "5s",
 });
 
 // Confirmation dialog
-window.pushToastConfirm('Are you sure?', '/delete/123', {
-  title: 'Confirm',
-  emoji: '⚠️',
-  onConfirm: 'Yes',
-  onCancel: 'No'
+window.showToastConfirm({
+    type: "warning",
+    message: "Are you sure?",
+    onconfirmLink: "/delete/123",
+    title: "Confirm",
+    emoji: "⚠️",
+    onConfirm: "Yes",
+    onCancel: "No",
 });
 ```
 
@@ -415,14 +457,16 @@ window.pushToastConfirm('Are you sure?', '/delete/123', {
 ```javascript
 // Dispatch from vanilla JavaScript
 document.getElementById('myButton').addEventListener('click', function() {
-    window.pushToast('success', 'Button clicked!', {
+    window.showToast({
+        type: 'success',
+        message: 'Button clicked!'
         emoji: '🖱️',
         duration: '2s'
     });
 });
 
 // With Livewire Alpine.js
-<button @click="window.pushToast('info', 'Alpine works!', { emoji: '⚡' })">
+<button @click="window.showToast({ type: 'info', message: 'Alpine works!', emoji: '⚡' })">
     Click Me
 </button>
 ```
@@ -432,20 +476,25 @@ document.getElementById('myButton').addEventListener('click', function() {
 ```javascript
 // In your app.js or custom script
 export function showSuccessToast(message) {
-  window.pushToast('success', message, {
-    title: 'Success',
-    emoji: '✅',
-    duration: '3s'
-  });
+    window.showToast({
+        type: "success",
+        message: message,
+        title: "Success",
+        emoji: "✅",
+        duration: "3s",
+    });
 }
 
 export function confirmDelete(url) {
-  window.pushToastConfirm('Are you sure you want to delete this?', url, {
-    title: 'Confirm Deletion',
-    emoji: '🗑️',
-    onConfirm: 'Delete',
-    onCancel: 'Cancel'
-  });
+    window.showToastConfirm({
+        type: "info",
+        message: "Are you sure you want to delete this?",
+        onconfirmLink: url,
+        title: "Confirm Deletion",
+        emoji: "🗑️",
+        onConfirm: "Delete",
+        onCancel: "Cancel",
+    });
 }
 ```
 
@@ -484,7 +533,7 @@ public function store(Request $request)
 {
     $user = User::create($request->all());
 
-    addToast('success', 'User created successfully!')
+    showToast('success', 'User created successfully!')
         ->title('Success')
         ->emoji('👤')
         ->withAction('View Profile', route('users.show', $user->id));
@@ -528,7 +577,7 @@ public function save()
 
     User::create($this->form);
 
-    addToast('success', 'User added!')
+    showToast('success', 'User added!')
         ->emoji('🎯')
         ->title('Added')
         ->pin();
@@ -544,15 +593,64 @@ public function import()
     $failed = 2;
 
     if ($success > 0) {
-        addToast('success', "$success items imported successfully")
+        showToast('success', "$success items imported successfully")
             ->emoji('✅')
             ->duration(3000);
     }
 
     if ($failed > 0) {
-        addToast('warning', "$failed items failed to import")
+        showToast('warning', "$failed items failed to import")
             ->emoji('⚠️')
             ->withAction('View Log', '/import/log');
+    }
+}
+```
+
+#### Example 5: Using message-only helpers for cleaner notifications
+
+```php
+public function updateProfile(Request $request)
+{
+    $user = auth()->user();
+    $user->update($request->all());
+
+    // Clean message without "Success" title
+    showToastSuccessMessage('Profile updated successfully!');
+
+    return redirect()->back();
+}
+
+public function validateForm($data)
+{
+    if (empty($data['email'])) {
+        // Clean error without "Error" title
+        showToastErrorMessage('Email is required');
+        return false;
+    }
+
+    if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        // Clean warning without "Warning" title
+        showToastWarningMessage('Please enter a valid email address');
+        return false;
+    }
+
+    // Clean info without "Info" title
+    showToastInfoMessage('Validation passed');
+    return true;
+}
+
+public function sendNotification()
+{
+    try {
+        // Send notification logic
+
+        // Success with title for important actions
+        showToastSuccess('Notification sent to all users!')
+            ->emoji('📧')
+            ->pin();
+    } catch (\Exception $e) {
+        // Danger message for critical errors
+        showToastDangerMessage('Failed to send notification: ' . $e->getMessage());
     }
 }
 ```
@@ -633,7 +731,7 @@ class ToastFeatureTest extends TestCase
 
     public function test_toast_is_added_to_session()
     {
-        addToastSuccess('Test message');
+        showToastSuccess('Test message');
 
         $toasts = session('toasts');
 
@@ -645,9 +743,9 @@ class ToastFeatureTest extends TestCase
 
     public function test_multiple_toasts_can_be_queued()
     {
-        addToastSuccess('First');
-        addToastError('Second');
-        addToastWarning('Third');
+        showToastSuccess('First');
+        showToastError('Second');
+        showToastWarning('Third');
 
         $toasts = session('toasts');
 
@@ -734,18 +832,54 @@ public $actions;     // Array of actions [label + url]
 
 ### Helper Functions
 
+#### Standard Toast Helpers (With Titles)
+
+| Function                     | Description                     |
+| ---------------------------- | ------------------------------- |
+| `showToast($type, $message)` | Create a generic toast          |
+| `showToastSuccess($message)` | Create success toast with title |
+| `showToastError($message)`   | Create error toast with title   |
+| `showToastDanger($message)`  | Create danger toast with title  |
+| `showToastWarning($message)` | Create warning toast with title |
+| `showToastInfo($message)`    | Create info toast with title    |
+
+#### Message-Only Helpers (Without Titles)
+
+| Function                            | Description                           |
+| ----------------------------------- | ------------------------------------- |
+| `showToastSuccessMessage($message)` | Success toast without "Success" title |
+| `showToastErrorMessage($message)`   | Error toast without "Error" title     |
+| `showToastDangerMessage($message)`  | Danger toast without "Danger" title   |
+| `showToastWarningMessage($message)` | Warning toast without "Warning" title |
+| `showToastInfoMessage($message)`    | Info toast without "Info" title       |
+
+#### Confirmation Helpers
+
 | Function                      | Description                 |
 | ----------------------------- | --------------------------- |
-| `addToast($type, $message)`   | Create a generic toast      |
-| `addToastSuccess($message)`   | Create success toast        |
-| `addToastError($message)`     | Create error toast          |
-| `addToastWarning($message)`   | Create warning toast        |
-| `addToastInfo($message)`      | Create info toast           |
 | `addConfirm($message)`        | Create confirmation dialog  |
 | `addConfirmSuccess($message)` | Create success confirmation |
 | `addConfirmError($message)`   | Create error confirmation   |
 | `addConfirmWarning($message)` | Create warning confirmation |
 | `addConfirmInfo($message)`    | Create info confirmation    |
+
+**Usage Example:**
+
+```php
+// With title (default)
+showToastSuccess('User created successfully!');
+// Output: [✅ Success] User created successfully!
+
+// Without title (message only)
+showToastSuccessMessage('User created successfully!');
+// Output: [✅] User created successfully!
+
+// Confirmation dialog
+addConfirmError('Delete this user?')
+    ->link(route('users.destroy', $user->id))
+    ->onConfirm('Yes, Delete')
+    ->onCancel('Cancel');
+```
 
 ### Facade Methods
 
@@ -761,9 +895,9 @@ Toast::confirm($message);
 
 ### Artisan Commands
 
-| Command           | Description                                   |
-| ----------------- | --------------------------------------------- |
-| `toasts:inject`   | Inject toast references into layout files     |
+| Command         | Description                               |
+| --------------- | ----------------------------------------- |
+| `toasts:inject` | Inject toast references into layout files |
 
 **Usage Examples:**
 

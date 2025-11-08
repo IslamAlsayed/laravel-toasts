@@ -1,37 +1,79 @@
 <?php
 
-if (!function_exists('addToast')) {
-    function addToast($type, $message)
+if (!function_exists('showToast')) {
+    function showToast($type, $message)
     {
         return app('toast')->add($type, $message);
     }
 }
 
-if (!function_exists('addToastSuccess')) {
-    function addToastSuccess($message)
+if (!function_exists('showToastSuccess')) {
+    function showToastSuccess($message)
     {
         return app('toast')->add('success', $message);
     }
 }
 
-if (!function_exists('addToastError')) {
-    function addToastError($message)
+if (!function_exists('showToastSuccessMessage')) {
+    function showToastSuccessMessage($message)
+    {
+        return app('toast')->add('success', $message, true);
+    }
+}
+
+if (!function_exists('showToastError')) {
+    function showToastError($message)
     {
         return app('toast')->add('error', $message);
     }
 }
 
-if (!function_exists('addToastWarning')) {
-    function addToastWarning($message)
+if (!function_exists('showToastErrorMessage')) {
+    function showToastErrorMessage($message)
+    {
+        return app('toast')->add('error', $message, true);
+    }
+}
+
+if (!function_exists('showToastDanger')) {
+    function showToastDanger($message)
+    {
+        return app('toast')->add('danger', $message);
+    }
+}
+
+if (!function_exists('showToastDangerMessage')) {
+    function showToastDangerMessage($message)
+    {
+        return app('toast')->add('danger', $message, true);
+    }
+}
+
+if (!function_exists('showToastWarning')) {
+    function showToastWarning($message)
     {
         return app('toast')->add('warning', $message);
     }
 }
 
-if (!function_exists('addToastInfo')) {
-    function addToastInfo($message)
+if (!function_exists('showToastWarningMessage')) {
+    function showToastWarningMessage($message)
+    {
+        return app('toast')->add('warning', $message, true);
+    }
+}
+
+if (!function_exists('showToastInfo')) {
+    function showToastInfo($message)
     {
         return app('toast')->add('info', $message);
+    }
+}
+
+if (!function_exists('showToastInfoMessage')) {
+    function showToastInfoMessage($message)
+    {
+        return app('toast')->add('info', $message, true);
     }
 }
 
